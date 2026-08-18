@@ -3,8 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenShop. — P2P · Tor · Monero</title>
-  <meta name="description" content="A private, self-hosted P2P marketplace hosted over Tor and settled in Monero (XMR).">
+  <title>OpenShop: Private P2P Marketplace on Tor &amp; Monero</title>
+  <meta name="description" content="Self-hosted, private peer-to-peer marketplace hosted over Tor and settled non-custodially in Monero.">
+  <meta name="theme-color" content="#0F1115">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph / Facebook / Discord -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OpenShop">
+  <meta property="og:title" content="OpenShop: Private P2P Marketplace">
+  <meta property="og:description" content="Self-hosted, private peer-to-peer marketplace hosted over Tor and settled non-custodially in Monero.">
+  <meta property="og:image" content="assets/images/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="OpenShop: Private P2P Marketplace over Tor &amp; Monero">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OpenShop: Private P2P Marketplace">
+  <meta name="twitter:description" content="Self-hosted, private peer-to-peer marketplace hosted over Tor and settled non-custodially in Monero.">
+  <meta name="twitter:image" content="assets/images/og-image.png">
+  <meta name="twitter:image:alt" content="OpenShop: Private P2P Marketplace over Tor &amp; Monero">
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
 
@@ -15,52 +36,8 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
-  
-  <script src="js/eula.js"></script>
 </head>
 <body>
-
-  <!-- ONE-TIME EULA / LEGAL DISCLOSURE OVERLAY -->
-  <div id="eulaOverlay" class="eula-overlay">
-    <div class="eula-modal">
-      <div class="eula-icon-wrap">
-        <div class="eula-icon-glow"></div>
-        <svg class="eula-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="m9 12 2 2 4-4"/>
-        </svg>
-      </div>
-
-      <h2 class="eula-title">Legal Terms & EULA</h2>
-      <p class="eula-desc">
-        OpenShop is an open-source, self-hosted, peer-to-peer marketplace protocol. You must acknowledge that this software is strictly intended for lawful commerce and research.
-      </p>
-
-      <div class="eula-notice-box">
-        <div class="eula-notice-item">
-          <span class="eula-notice-dot"></span>
-          <span>Zero tolerance for illicit trade, contraband, or unlawful conduct.</span>
-        </div>
-        <div class="eula-notice-item">
-          <span class="eula-notice-dot"></span>
-          <span>Self-hosted & non-custodial; operators assume full jurisdictional responsibility.</span>
-        </div>
-      </div>
-
-      <label class="eula-checkbox-label" for="eulaCheckbox">
-        <input type="checkbox" id="eulaCheckbox" class="eula-checkbox">
-        <span class="eula-custom-check"></span>
-        <span class="eula-checkbox-text">
-          I confirm and agree that <strong>I will only use this software for legal purposes</strong>.
-        </span>
-      </label>
-
-      <button id="btnAcceptEula" class="eula-btn" disabled>
-        <span>Acknowledge & Enter</span>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </button>
-    </div>
-  </div>
 
   <div class="landing-container">
 

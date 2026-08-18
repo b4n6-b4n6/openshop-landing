@@ -508,12 +508,8 @@
       }
     }
 
-    // Initialize EULA modal gate and start scenario on acceptance
-    if (window.OpenShopEula && typeof window.OpenShopEula.init === 'function') {
-      window.OpenShopEula.init(startScenarioOnce);
-    } else {
-      startScenarioOnce();
-    }
+    // Start scenario directly on initialization
+    startScenarioOnce();
   }
 
   if (document.readyState === 'loading') {

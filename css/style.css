@@ -122,252 +122,25 @@
       }
     }
 
-    /* Animation state controlled by EULA acceptance */
-    html.eula-pending .landing-container {
-      opacity: 0;
-      pointer-events: none;
-      filter: blur(4px);
-      transition: opacity 0.4s ease, filter 0.4s ease;
-    }
-
-    html.eula-accepted .landing-container {
-      opacity: 1;
-      filter: none;
-    }
-
-    html.eula-accepted .hero-header {
+    /* Page Entrance Animations */
+    .hero-header {
       animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    html.eula-accepted .stage-wrapper {
+    .stage-wrapper {
       animation: stageEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
     }
 
-    html.eula-accepted .features-pill-row {
+    .features-pill-row {
       animation: fadeInStagger 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
     }
 
-    html.eula-accepted .quickstart-box {
+    .quickstart-box {
       animation: fadeInStagger 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
     }
 
-    html.eula-accepted .landing-footer {
+    .landing-footer {
       animation: fadeInStagger 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
-    }
-
-    /* --- ONE-TIME EULA & LEGAL DISCLOSURE MODAL --- */
-    .eula-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: rgba(10, 12, 16, 0.82);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 1;
-      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    html.eula-pending .eula-overlay {
-      display: flex;
-    }
-
-    html.eula-accepted .eula-overlay {
-      display: none;
-    }
-
-    .eula-overlay.closing {
-      opacity: 0;
-      transform: scale(0.96);
-      pointer-events: none;
-    }
-
-    .eula-modal {
-      width: 100%;
-      max-width: 440px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 24px;
-      padding: 30px 26px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05);
-      animation: modalPop 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-
-    @keyframes modalPop {
-      from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.94);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .eula-icon-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-
-    .eula-icon-glow {
-      position: absolute;
-      width: 64px;
-      height: 64px;
-      background: var(--accent);
-      filter: blur(24px);
-      opacity: 0.35;
-      border-radius: 50%;
-    }
-
-    .eula-icon {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eula-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .eula-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 18px;
-    }
-
-    .eula-notice-box {
-      width: 100%;
-      background: var(--bg-surface-2);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      text-align: left;
-      margin-bottom: 18px;
-    }
-
-    .eula-notice-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 11.5px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .eula-notice-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--accent);
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-
-    .eula-checkbox-label {
-      width: 100%;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      text-align: left;
-      cursor: pointer;
-      user-select: none;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      transition: background 0.15s ease, border-color 0.15s ease;
-      margin-bottom: 20px;
-    }
-
-    .eula-checkbox-label:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--border-strong);
-    }
-
-    .eula-checkbox {
-      display: none;
-    }
-
-    .eula-custom-check {
-      width: 18px;
-      height: 18px;
-      border-radius: 5px;
-      border: 1.5px solid var(--border-strong);
-      background: var(--bg-surface-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-      transition: all 0.15s ease;
-    }
-
-    .eula-checkbox:checked + .eula-custom-check {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .eula-checkbox:checked + .eula-custom-check::after {
-      content: '';
-      width: 4px;
-      height: 8px;
-      border: solid var(--on-accent);
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg) translate(-0.5px, -0.5px);
-    }
-
-    .eula-checkbox-text {
-      font-size: 12px;
-      color: var(--text);
-      line-height: 1.45;
-    }
-
-    .eula-btn {
-      width: 100%;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--accent);
-      color: var(--on-accent);
-      font-size: 13.5px;
-      font-weight: 700;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 16px rgba(255, 102, 0, 0.25);
-    }
-
-    .eula-btn:hover:not(:disabled) {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
-    }
-
-    .eula-btn:disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
-      box-shadow: none;
-      filter: grayscale(0.5);
     }
 
     /* --- BRANDING HEADER --- */
