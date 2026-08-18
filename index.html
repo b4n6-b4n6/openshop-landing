@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenShop. — P2P · Tor · Monero</title>
+  <meta name="description" content="A private, self-hosted P2P marketplace hosted over Tor and settled in Monero (XMR).">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <!-- Fonts & Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script src="js/eula.js"></script>
+</head>
+<body>
+
+  <!-- ONE-TIME EULA / LEGAL DISCLOSURE OVERLAY -->
+  <div id="eulaOverlay" class="eula-overlay">
+    <div class="eula-modal">
+      <div class="eula-icon-wrap">
+        <div class="eula-icon-glow"></div>
+        <svg class="eula-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+
+      <h2 class="eula-title">Legal Terms & EULA</h2>
+      <p class="eula-desc">
+        OpenShop is an open-source, self-hosted, peer-to-peer marketplace protocol. You must acknowledge that this software is strictly intended for lawful commerce and research.
+      </p>
+
+      <div class="eula-notice-box">
+        <div class="eula-notice-item">
+          <span class="eula-notice-dot"></span>
+          <span>Zero tolerance for illicit trade, contraband, or unlawful conduct.</span>
+        </div>
+        <div class="eula-notice-item">
+          <span class="eula-notice-dot"></span>
+          <span>Self-hosted & non-custodial; operators assume full jurisdictional responsibility.</span>
+        </div>
+      </div>
+
+      <label class="eula-checkbox-label" for="eulaCheckbox">
+        <input type="checkbox" id="eulaCheckbox" class="eula-checkbox">
+        <span class="eula-custom-check"></span>
+        <span class="eula-checkbox-text">
+          I confirm and agree that <strong>I will only use this software for legal purposes</strong>.
+        </span>
+      </label>
+
+      <button id="btnAcceptEula" class="eula-btn" disabled>
+        <span>Acknowledge & Enter</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="landing-container">
+
+    <header class="hero-header">
+      <div class="logo-wrapper">
+        <div class="logo-glow"></div>
+        <img class="logo-svg" src="assets/icons/logo.svg" alt="OpenShop Logo" width="58" height="58">
+      </div>
+
+      <h1 class="brand-title">OPENSHOP<span class="brand-dot">.</span></h1>
+      <div class="brand-tagline">P2P · TOR · MONERO</div>
+
+      <!-- Sleek Action Header Navigation -->
+      <div class="hero-nav-actions">
+        <a href="https://github.com/b4n6-b4n6/openshop" target="_blank" rel="noopener noreferrer" class="nav-btn nav-btn-github" title="View Source Repository">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+          <span class="nav-badge">v1.0</span>
+        </a>
+
+        <a href="https://github.com/b4n6-b4n6/openshop/tree/main/docs" target="_blank" rel="noopener noreferrer" class="nav-btn" title="Architecture & Setup Documentation">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+          <span>Docs</span>
+        </a>
+
+        <a href="https://t.me/OpenShop_P2P" target="_blank" rel="noopener noreferrer" class="nav-btn nav-btn-telegram" title="Join Telegram Community">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.313 4.672c.458 0 .66-.21.916-.458l2.199-2.138 4.573 3.378c.843.464 1.448.225 1.658-.783l3.003-14.151c.307-1.23-.467-1.785-1.212-1.467z"/></svg>
+          <span>Telegram</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- DUAL PHONES HARDWARE STAGE -->
+    <main class="stage-wrapper">
+
+      <!-- LEFT COLUMN: SHOP OWNER PHONE -->
+      <div class="phone-column">
+        <div class="phone-header-label">
+          <div class="phone-role-text">
+            <span class="role-dot"></span>
+            <span>Shop Owner</span>
+          </div>
+          <div class="phone-sub-tag">127.0.0.1:7001</div>
+        </div>
+
+        <div class="phone-device" id="ownerDevice">
+          <div class="screen-glass">
+            
+            <!-- Clean mobile status bar (no lightning 9ms) -->
+            <div class="phone-statusbar">
+              <span>12:00</span>
+              <div class="phone-notch"></div>
+              <span>5G</span>
+            </div>
+
+            <div class="phone-viewport" id="ownerViewport">
+              
+              <!-- Touch Cursor Simulation -->
+              <div class="touch-cursor" id="ownerCursor"></div>
+
+              <!-- OWNER VIEW 1: INITIAL WELCOME SCREEN -->
+              <div class="view-panel active" id="ownerV1">
+                <div class="app-header">
+                  <div class="app-header-left"></div>
+                  <div class="app-header-title">OpenShop</div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill offline" title="Shop offline">
+                      <span class="indicator-dot"></span><span>Offline</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 20px; text-align: center;">
+                  <div style="margin-bottom: 24px;">
+                    <img src="assets/icons/logo.svg" alt="OpenShop" width="72" height="72">
+                  </div>
+
+                  <h2 style="font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 6px;">OpenShop</h2>
+                  <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 32px; max-width: 240px; line-height: 1.4;">Self-hosted P2P marketplace over Tor with Monero settlement.</p>
+
+                  <div style="width: 100%; display: flex; flex-direction: column; gap: 10px;">
+                    <button class="app-btn app-btn-primary" id="btnOpenNewShop">
+                      <span>OPEN NEW SHOP</span>
+                    </button>
+                    <button class="app-btn app-btn-secondary">
+                      <span>BROWSE SHOP</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- OWNER VIEW 2: WALLET SETUP FORM (openShopPage.js) -->
+              <div class="view-panel" id="ownerV2">
+                <div class="app-header">
+                  <div class="app-header-left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                  </div>
+                  <div class="app-header-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/><circle cx="16" cy="14" r="1.5"/></svg>
+                    <span>Open New Shop</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill syncing" title="Checking shop connectivity">
+                      <span class="indicator-dot"></span><span>Checking…</span>
+                    </div>
+                    <div class="indicator-pill syncing" title="Wallet sync status">
+                      <span class="indicator-dot"></span><span>Wallet</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="padding: 16px 14px; display: flex; flex-direction: column; flex: 1;">
+                  <p style="font-size: 13px; color: var(--text-muted); line-height: 1.4; margin-bottom: 16px;">
+                    Import a <strong style="color: var(--text);">view-only</strong> Monero wallet. Your spend key never leaves your device.
+                  </p>
+
+                  <div class="app-field-group">
+                    <label class="app-field-label">Monero wallet primary address</label>
+                    <div class="app-input mono" id="inputAddress">4…</div>
+                  </div>
+
+                  <div class="app-field-group">
+                    <label class="app-field-label">Private view key</label>
+                    <div class="app-input mono" id="inputViewKey">secret view key</div>
+                  </div>
+
+                  <div class="app-field-group">
+                    <label class="app-field-label">Restore block height</label>
+                    <div class="app-input mono" id="inputHeight">e.g. 3155600</div>
+                  </div>
+
+                  <div style="margin-top: auto; padding-top: 16px;">
+                    <button class="app-btn app-btn-primary" id="btnCreateShop">
+                      <span>Create</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- OWNER VIEW 3: SPINNING UP ONION -->
+              <div class="view-panel" id="ownerV3">
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 20px; text-align: center; gap: 18px;">
+                  <img src="assets/icons/logo.svg" alt="OpenShop" width="68" height="68">
+                  
+                  <div class="onion-spin-ring"></div>
+
+                  <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <h2 style="font-size: 16px; font-weight: 800; letter-spacing: 0.05em; color: var(--text);">SPINNING UP ONION</h2>
+                    <p style="font-size: 13px; color: var(--text-muted);">Publishing your shop to the Tor network…</p>
+                    <span id="onionProgressPercent" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 4px;">35%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- OWNER VIEW 4: INITIAL STORE PAGE (viewShopPage.js - FIRST SHOWN BEFORE ADDING PRODUCT) -->
+              <div class="view-panel" id="ownerV4">
+                <div class="app-header">
+                  <div class="app-header-left"></div>
+                  <div class="app-header-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9V7l2-4h14l2 4v2"/><path d="M5 13v8h14v-8"/><path d="M9 21v-6h6v6"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/></svg>
+                    <span>My Shop</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" title="Shop onion service is online">
+                      <span class="indicator-dot"></span><span>Online</span>
+                    </div>
+                    <div class="indicator-pill syncing" id="ownerSyncPillInit" title="Wallet block 3200000 · 85% synchronized">
+                      <span class="indicator-dot"></span><span id="ownerSyncLabelInit">85%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="app-banner">
+                  <img src="assets/images/cypherpunk-banner.webp" alt="Cypherpunk Supply Banner">
+                </div>
+
+                <div style="padding: 0 14px 20px;">
+                  <div class="app-avatar">
+                    <img src="assets/images/cypherpunk-logo.webp" alt="Cypherpunk Supply Logo">
+                  </div>
+
+                  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
+                    <div>
+                      <h2 style="font-size: 17px; font-weight: 800; color: var(--text);">Cypherpunk Supply</h2>
+                      <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+                        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--accent);">http://2p2…xmr.onion</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                      </div>
+                    </div>
+
+                    <!-- QR Trigger Button -->
+                    <div id="btnStoreQrPreview" style="width: 40px; height: 40px; background: #FFF; border-radius: 8px; padding: 3px; cursor: pointer; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.5);">
+                      <img src="assets/icons/qr-matrix.svg" alt="QR Code" width="34" height="34">
+                    </div>
+                  </div>
+
+                  <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-top: 8px;">
+                    Hardware wallets & air-gapped seed security tools.
+                  </p>
+
+                  <!-- Real Action Buttons -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0;">
+                    <button class="app-btn app-btn-secondary" style="height: 38px; font-size: 12px; gap: 6px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                      <span>Edit shop</span>
+                    </button>
+                    <button class="app-btn app-btn-secondary" id="btnStoreAddProduct" style="height: 38px; font-size: 12px; gap: 6px; border-color: var(--accent); color: var(--accent);">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                      <span>Add product</span>
+                    </button>
+                  </div>
+
+                  <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div class="app-hub-link">
+                      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 9-5 9 5v8l-9 5-9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></span>
+                      <span style="flex: 1;">View my products (0)</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                    <div class="app-hub-link">
+                      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/></svg></span>
+                      <span style="flex: 1;">View my orders</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                    <div class="app-hub-link">
+                      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                      <span style="flex: 1;">View my chats</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- OWNER VIEW 5: ADD PRODUCT FORM (newProductPage.js) -->
+              <div class="view-panel" id="ownerV5">
+                <div class="app-header">
+                  <div class="app-header-left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                  </div>
+                  <div class="app-header-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 9-5 9 5v8l-9 5-9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg>
+                    <span>Add Product</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" title="Shop onion service is online">
+                      <span class="indicator-dot"></span><span>Online</span>
+                    </div>
+                    <div class="indicator-pill" title="Wallet block 3200000 · 100% synchronized">
+                      <span class="indicator-dot"></span><span>Synced</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="padding: 14px 12px; display: flex; flex-direction: column; flex: 1;">
+                  <div class="app-field-group">
+                    <label class="app-field-label">Name</label>
+                    <div class="app-input" id="inputProdName">Product name</div>
+                  </div>
+
+                  <div class="app-field-group">
+                    <label class="app-field-label">Description</label>
+                    <div class="app-input" id="inputProdDesc" style="height: 38px; font-size: 12px;">Describe it…</div>
+                  </div>
+
+                  <div class="app-field-group">
+                    <label class="app-field-label">Product photo</label>
+                    <div id="photoPickerBox" style="height: 56px; border: 1px dashed var(--border); border-radius: 12px; background: var(--bg-surface-2); display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-faint); font-size: 11px; cursor: pointer; overflow: hidden; padding: 4px 8px;">
+                      <img id="photoPickerThumb" src="assets/images/coldcard-mk4.webp" alt="Product" style="display: none; width: 44px; height: 44px; object-fit: contain; border-radius: 6px; background: var(--bg-surface); padding: 2px;">
+                      <svg id="photoPickerIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                      <span id="photoPickerLabel">Choose or drop image</span>
+                    </div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <div class="app-field-group">
+                      <label class="app-field-label">Price (XMR)</label>
+                      <div class="app-input mono" id="inputProdPrice">0.00</div>
+                    </div>
+                    <div class="app-field-group">
+                      <label class="app-field-label">Quantity</label>
+                      <div class="app-input mono" id="inputProdQty">1</div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: auto; padding-top: 10px;">
+                    <button class="app-btn app-btn-primary" id="btnAddProductSubmit" style="height: 40px;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                      <span>Add product</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- OWNER VIEW 6: MY STORE WITH PRODUCT & SHARE QR MODAL (viewShopPage.js) -->
+              <div class="view-panel" id="ownerV6">
+                <div class="app-header">
+                  <div class="app-header-left"></div>
+                  <div class="app-header-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9V7l2-4h14l2 4v2"/><path d="M5 13v8h14v-8"/><path d="M9 21v-6h6v6"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/></svg>
+                    <span>My Shop</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" title="Shop onion service is online">
+                      <span class="indicator-dot"></span><span>Online</span>
+                    </div>
+                    <div class="indicator-pill" title="Wallet block 3200000 · 100% synchronized">
+                      <span class="indicator-dot"></span><span>Synced</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="app-banner">
+                  <img src="assets/images/cypherpunk-banner.webp" alt="Cypherpunk Supply Banner">
+                </div>
+
+                <div style="padding: 0 14px 20px;">
+                  <div class="app-avatar">
+                    <img src="assets/images/cypherpunk-logo.webp" alt="Cypherpunk Supply Logo">
+                  </div>
+
+                  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
+                    <div>
+                      <h2 style="font-size: 17px; font-weight: 800; color: var(--text);">Cypherpunk Supply</h2>
+                      <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+                        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--accent);">http://2p2…xmr.onion</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                      </div>
+                    </div>
+
+                    <!-- Authentic QR Button -->
+                    <div id="btnOwnerQrTrigger" style="width: 40px; height: 40px; background: #FFF; border-radius: 8px; padding: 3px; cursor: pointer; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.5);">
+                      <img src="assets/icons/qr-matrix.svg" alt="QR Code" width="34" height="34">
+                    </div>
+                  </div>
+
+                  <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-top: 8px;">
+                    Hardware wallets & air-gapped seed security tools.
+                  </p>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0;">
+                    <button class="app-btn app-btn-secondary" style="height: 38px; font-size: 12px;">Edit shop</button>
+                    <button class="app-btn app-btn-secondary" style="height: 38px; font-size: 12px;">Add product</button>
+                  </div>
+
+                  <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div class="app-hub-link">
+                      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 9-5 9 5v8l-9 5-9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></span>
+                      <span style="flex: 1;">View my products (1)</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                    <div class="app-hub-link">
+                      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/></svg></span>
+                      <span style="flex: 1;">View my orders</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                    <div class="app-hub-link">
+                      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                      <span style="flex: 1;">View my chats</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- QR Modal popup overlay -->
+                <div class="qr-modal-overlay" id="ownerQrModal">
+                  <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px 16px; width: 100%; max-width: 250px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <div class="qr-art-box">
+                      <img src="assets/icons/qr-matrix.svg" alt="Store Onion QR Code" width="156" height="156">
+                      <div class="qr-center-watermark">
+                        <img src="assets/icons/logo.svg" alt="OpenShop" width="22" height="22">
+                      </div>
+                    </div>
+                    <p style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); word-break: break-all; margin-bottom: 12px;">http://2p2…xmr.onion</p>
+                    <button class="app-btn app-btn-secondary" style="height: 34px; font-size: 12px;">Save image</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- OWNER VIEW 7: CHAT PAGE (viewConvoPage.js) -->
+              <div class="view-panel" id="ownerV7">
+                <div class="app-header">
+                  <div class="app-header-left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                  </div>
+                  <div class="app-header-title">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <span>Buyer #1042</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" title="Shop onion service is online">
+                      <span class="indicator-dot"></span><span>Online</span>
+                    </div>
+                    <div class="indicator-pill" title="Wallet block 3200000 · 100% synchronized">
+                      <span class="indicator-dot"></span><span>Synced</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="chat-viewport">
+                  <!-- Pinned deposit confirmation banner -->
+                  <div class="chat-pinned-event">
+                    <div class="chat-event-indicator">
+                      <span class="chat-event-dot"></span>
+                      <span class="chat-event-title">PAYMENT CONFIRMED</span>
+                    </div>
+                    <span class="chat-event-amount">0.8500 XMR</span>
+                  </div>
+
+                  <!-- Message stream anchored to bottom -->
+                  <div class="chat-thread-stream" id="ownerChatThread">
+                    <div class="chat-bubble-container other" id="ownerChatMsg1">
+                      <div class="chat-msg-bubble other">Can you ship with stealth tamper-evident packaging?</div>
+                      <div class="chat-time-meta"><span>12:02</span></div>
+                    </div>
+
+                    <div class="chat-bubble-container me" id="ownerChatMsg2">
+                      <div class="chat-msg-bubble me">Packed & vacuum-sealed. Dispatched today! 📦</div>
+                      <div class="chat-time-meta"><span>12:03</span><span class="chat-time-receipt">✓✓</span></div>
+                    </div>
+                  </div>
+
+                  <!-- Input bottom bar -->
+                  <div class="chat-input-bar">
+                    <div class="chat-action-btn attach" title="Attach photo">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                    </div>
+                    <div class="chat-input-field placeholder" id="ownerChatInput">Message buyer…</div>
+                    <button class="chat-action-btn send" id="btnOwnerSendMsg" aria-label="Send message">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTERED ANIMATED TEXT (Full White, Bold, No timer, no steps, no dashes) -->
+        <div class="feature-ticker-container">
+          <div class="ticker-item active" id="tickerStep1">
+            Launch your store instantly on localhost with zero cloud dependencies.
+          </div>
+          <div class="ticker-item" id="tickerStep2">
+            Non-custodial view keys track incoming payments while spend keys stay safe.
+          </div>
+          <div class="ticker-item" id="tickerStep3">
+            Tor hidden service starts automatically with zero port forwarding required.
+          </div>
+          <div class="ticker-item" id="tickerStep4">
+            Manage your storefront inventory orders and direct buyer communications.
+          </div>
+          <div class="ticker-item" id="tickerStep5">
+            List products in seconds with photos detailed descriptions and Monero pricing.
+          </div>
+          <div class="ticker-item" id="tickerStep6">
+            Broadcast live over Tor with instant on-chain payment detection and invoices.
+          </div>
+          <div class="ticker-item" id="tickerStep7">
+            Direct end-to-end encrypted messaging over the Tor network.
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER COLUMN: CLEAN STATIC VERTICAL DIVIDER -->
+      <div class="p2p-divider"></div>
+
+      <!-- RIGHT COLUMN: BUYER PHONE -->
+      <div class="phone-column">
+        <div class="phone-header-label">
+          <div class="phone-role-text">
+            <span class="role-dot buyer"></span>
+            <span>Buyer</span>
+          </div>
+          <div class="phone-sub-tag">Tor Browser (v3)</div>
+        </div>
+
+        <div class="phone-device" id="buyerDevice">
+          <div class="screen-glass">
+            
+            <div class="phone-statusbar">
+              <span>12:00</span>
+              <div class="phone-notch"></div>
+              <span>🧅 Tor v3</span>
+            </div>
+
+            <div class="phone-viewport" id="buyerViewport">
+              
+              <!-- Buyer Touch Cursor -->
+              <div class="touch-cursor" id="buyerCursor"></div>
+
+              <!-- BUYER VIEW 1: STANDBY / TOR SCAN -->
+              <div class="view-panel active" id="buyerV1">
+                <div class="app-header">
+                  <div class="app-header-left"></div>
+                  <div class="app-header-title">Tor Onion Browser</div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" title="Tor circuit ready">
+                      <span class="indicator-dot"></span><span>Ready</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px; text-align: center;">
+                  <div id="buyerStandbyWaiting" style="display: flex; flex-direction: column; align-items: center; gap: 14px;">
+                    <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--bg-surface-2); display: flex; align-items: center; justify-content: center; color: var(--text-faint);">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                    </div>
+                    <div>
+                      <h3 style="font-size: 14px; font-weight: 700; color: var(--text);">Tor Onion Browser</h3>
+                      <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px; max-width: 200px;">Waiting for shop broadcast…</p>
+                    </div>
+                  </div>
+
+                  <div id="buyerScanTriggerBox" style="display: none; width: 100%; flex-direction: column; gap: 10px; margin-top: 18px;">
+                    <div class="app-input mono" style="font-size: 11px; color: var(--accent);">http://2p2…xmr.onion</div>
+                    <button class="app-btn app-btn-primary" id="btnBuyerConnect">
+                      <span>OPEN SHOP</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BUYER VIEW 2: REAL BUYER STORE PAGE (shopPage.js with Products, Chat, Orders options!) -->
+              <div class="view-panel" id="buyerV2">
+                <div class="app-header">
+                  <div class="app-header-left"></div>
+                  <div class="app-header-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9V7l2-4h14l2 4v2"/><path d="M5 13v8h14v-8"/><path d="M9 21v-6h6v6"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/></svg>
+                    <span>Shop</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" title="Connected over Tor v3">
+                      <span class="indicator-dot"></span><span>Tor v3</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="app-banner">
+                  <img src="assets/images/cypherpunk-banner.webp" alt="Cypherpunk Supply Banner">
+                </div>
+
+                <div style="padding: 0 14px 20px;">
+                  <div class="app-avatar">
+                    <img src="assets/images/cypherpunk-logo.webp" alt="Cypherpunk Supply Logo">
+                  </div>
+
+                  <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+                    <div>
+                      <h2 style="font-size: 17px; font-weight: 800; color: var(--text);">Cypherpunk Supply</h2>
+                      <span style="font-family: var(--font-mono); font-size: 11px; color: var(--accent);">http://2p2…xmr.onion</span>
+                    </div>
+                    <div style="width: 38px; height: 38px; background: #FFF; border-radius: 8px; padding: 3px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.5);">
+                      <img src="assets/icons/qr-matrix.svg" alt="QR Code" width="32" height="32">
+                    </div>
+                  </div>
+
+                  <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-top: 8px;">
+                    Hardware wallets & air-gapped seed security tools.
+                  </p>
+
+                  <!-- EXACT 3 BUYER SHOP BUTTONS (shopPage.js: Products, Chat, Orders) -->
+                  <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 16px;">
+                    <button class="app-btn app-btn-primary" id="btnBuyerShopProducts" style="height: 42px; font-size: 14px;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 9-5 9 5v8l-9 5-9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg>
+                      <span>Products</span>
+                    </button>
+                    <button class="app-btn app-btn-secondary" id="btnBuyerShopChat" style="height: 42px; font-size: 14px;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      <span>Chat</span>
+                    </button>
+                    <button class="app-btn app-btn-secondary" id="btnBuyerShopOrders" style="height: 42px; font-size: 14px;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/></svg>
+                      <span>Orders</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BUYER VIEW 3: PRODUCTS LIST (productsPage.js) -->
+              <div class="view-panel" id="buyerV3">
+                <div class="app-header">
+                  <div class="app-header-left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                  </div>
+                  <div class="app-header-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 9-5 9 5v8l-9 5-9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg>
+                    <span>Products</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" title="Connected over Tor v3">
+                      <span class="indicator-dot"></span><span>Tor v3</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="padding: 12px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                  <!-- Product Card -->
+                  <div id="buyerProductListingCard" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <div style="width: 44px; height: 44px; border-radius: 8px; background: var(--bg-surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
+                      <img src="assets/images/coldcard-mk4.webp" alt="Coldcard Mk4" style="width: 100%; height: 100%; object-fit: contain; padding: 2px;">
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                      <p style="font-size: 13px; font-weight: 700; color: var(--text); truncate;">Coldcard Mk4</p>
+                      <p style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--accent); margin-top: 1px;">0.85 XMR</p>
+                      <span style="font-size: 11px; color: var(--text-faint);">5 in stock</span>
+                    </div>
+                    <button class="app-btn app-btn-primary" id="btnBuyerListingPurchase" style="height: 32px; width: auto; padding: 0 12px; font-size: 12px;">Purchase</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BUYER VIEW 4: REAL PRODUCT DETAILS SCREEN (productPage.js) -->
+              <div class="view-panel" id="buyerV4">
+                <div class="app-header">
+                  <div class="app-header-left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                  </div>
+                  <div class="app-header-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 9-5 9 5v8l-9 5-9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg>
+                    <span>Purchase</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" title="Connected over Tor v3">
+                      <span class="indicator-dot"></span><span>Tor v3</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="padding: 14px 14px 18px; display: flex; flex-direction: column; flex: 1;">
+                  <!-- Product photo container -->
+                  <div style="width: 100%; height: 125px; border-radius: 12px; background: var(--bg-surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 12px;">
+                    <img src="assets/images/coldcard-mk4.webp" alt="Coldcard Mk4" style="width: 100%; height: 100%; object-fit: contain; padding: 6px;">
+                  </div>
+
+                  <div>
+                    <h2 style="font-size: 16px; font-weight: 800; color: var(--text);">Coldcard Mk4</h2>
+                    <p style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 2px;">0.85 XMR</p>
+                  </div>
+
+                  <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin: 10px 0 12px;">
+                    Air-gapped signing device with dual secure elements.
+                  </p>
+
+                  <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 0; border-top: 1px solid var(--border);">
+                    <span style="font-size: 12px; color: var(--text-muted);">Availability</span>
+                    <span style="font-size: 12px; font-weight: 600; color: var(--text);">5 in stock</span>
+                  </div>
+
+                  <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 0;">
+                    <span style="font-size: 12px; color: var(--text-muted);">Purchase quantity</span>
+                    <div style="display: flex; align-items: center; background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: 10px;">
+                      <button style="width: 28px; height: 28px; background: none; border: none; color: var(--text-muted); font-size: 14px; font-weight: bold;">−</button>
+                      <span style="width: 24px; text-align: center; font-size: 12px; font-weight: 700; color: var(--text);">1</span>
+                      <button style="width: 28px; height: 28px; background: none; border: none; color: var(--text-muted); font-size: 14px; font-weight: bold;">+</button>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: auto; padding-top: 10px;">
+                    <button class="app-btn app-btn-primary" id="btnSubmitPurchaseOrder" style="height: 42px;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/></svg>
+                      <span>Purchase · 0.85 XMR</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BUYER VIEW 5: REAL MONERO INVOICE / ORDER SCREEN (orderPage.js) -->
+              <div class="view-panel" id="buyerV5">
+                <div class="app-header">
+                  <div class="app-header-left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                  </div>
+                  <div class="app-header-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/></svg>
+                    <span>Order #1042</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" id="orderStatusBadge">
+                      <span class="indicator-dot"></span>
+                      <span id="orderStatusBadgeText">Pending</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="padding: 12px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                  <!-- Product summary row -->
+                  <div style="display: flex; align-items: center; gap: 8px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 8px 10px;">
+                    <div style="width: 32px; height: 32px; border-radius: 6px; background: var(--bg-surface-2); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
+                      <img src="assets/images/coldcard-mk4.webp" alt="Coldcard Mk4" style="width: 100%; height: 100%; object-fit: contain; padding: 2px;">
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                      <h3 style="font-size: 12px; font-weight: 700; color: var(--text); truncate;">Coldcard Mk4</h3>
+                      <p style="font-size: 11px; color: var(--text-muted);">1 × 0.85 XMR</p>
+                    </div>
+                  </div>
+
+                  <!-- Monero invoice card -->
+                  <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px 10px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <span style="font-size: 10px; text-transform: uppercase; font-weight: 600; color: var(--text-muted);">Amount Due</span>
+                    <div style="font-family: var(--font-mono); font-size: 16px; font-weight: 800; color: var(--text); margin: 2px 0 6px;">0.85000000 <span style="color: var(--accent); font-size: 13px;">XMR</span></div>
+
+                    <!-- REAL HIGH CONTRAST QR CODE SVG -->
+                    <div class="qr-art-box" style="margin-bottom: 8px; padding: 6px;">
+                      <img src="assets/icons/qr-matrix.svg" alt="Monero Payment QR Code" width="112" height="112">
+                      <div class="qr-center-watermark" style="width: 24px; height: 24px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="10" fill="#FF6600"/>
+                          <path d="M6 15V8l6 5 6-5v7h-3v-4l-3 2.5L9 11v4H6Z" fill="#FFF"/>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <div style="text-align: left; width: 100%;">
+                      <span style="font-size: 9px; font-weight: 600; text-transform: uppercase; color: var(--text-muted);">Pay to this address</span>
+                      <div style="display: flex; align-items: center; gap: 4px; background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 4px 6px; margin-top: 2px;">
+                        <span style="font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); word-break: break-all; flex: 1;">888tX2m...d4eXMRsub</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Dynamic Tx Status Notice -->
+                  <div id="buyerTxStatusNotice" style="border-radius: 10px; padding: 8px 10px; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; transition: all 0.3s ease; border: 1px solid var(--border); background: var(--bg-surface-2); color: var(--text-muted);">
+                    <div id="buyerTxStatusDot" class="indicator-dot" style="width: 6px; height: 6px;"></div>
+                    <span id="buyerTxStatusText">Waiting for incoming transaction</span>
+                  </div>
+
+                  <!-- TxID details row (reveals on confirmation) -->
+                  <div id="buyerTxidBox" style="display: none; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 6px 8px;">
+                    <p style="font-size: 9px; text-transform: uppercase; font-weight: 600; color: var(--text-faint);">Deposit txid</p>
+                    <p style="font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); word-break: break-all; margin-top: 1px;">d5a49e912b7f6c8209e8b104c8f10…</p>
+                  </div>
+
+                  <button class="app-btn app-btn-secondary" id="btnBuyerOpenChat" style="height: 38px; font-size: 13px; margin-top: auto;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <span>Chat with seller</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- BUYER VIEW 6: CHAT WITH SELLER (chatPage.js) -->
+              <div class="view-panel" id="buyerV6">
+                <div class="app-header">
+                  <div class="app-header-left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                  </div>
+                  <div class="app-header-title">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <span>Cypherpunk Supply</span>
+                  </div>
+                  <div class="indicators-group">
+                    <div class="indicator-pill" title="Tor End-to-End Encrypted">
+                      <span class="indicator-dot"></span><span>Encrypted</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="chat-viewport">
+                  <!-- Pinned session security badge -->
+                  <div class="chat-pinned-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>Tor End-to-End Encrypted Session</span>
+                  </div>
+
+                  <!-- Message stream anchored to bottom -->
+                  <div class="chat-thread-stream" id="buyerChatThread">
+                    <div class="chat-bubble-container me" id="buyerChatMsg1">
+                      <div class="chat-msg-bubble me">Can you ship with stealth tamper-evident packaging?</div>
+                      <div class="chat-time-meta"><span>12:02</span><span class="chat-time-receipt">✓✓</span></div>
+                    </div>
+
+                    <div class="chat-bubble-container other" id="buyerChatMsg2">
+                      <div class="chat-msg-bubble other">Packed & vacuum-sealed. Dispatched today! 📦</div>
+                      <div class="chat-time-meta"><span>12:03</span></div>
+                    </div>
+                  </div>
+
+                  <!-- Input bottom bar -->
+                  <div class="chat-input-bar">
+                    <div class="chat-action-btn attach" title="Attach photo">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                    </div>
+                    <div class="chat-input-field placeholder" id="buyerChatInput">Message seller…</div>
+                    <button class="chat-action-btn send" id="btnBuyerSendMsg" aria-label="Send message">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div style="width: 100%; max-width: 320px; text-align: center; font-size: 11px; color: var(--text-faint); font-family: var(--font-mono); padding: 8px 0;">
+          Direct P2P Client · Non-Custodial Monero Settlement
+        </div>
+      </div>
+
+    </main>
+
+    <!-- PILL FEATURES BAR -->
+    <div class="features-pill-row">
+      <div class="feature-chip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Tor Hidden Service v3</span>
+      </div>
+      <div class="feature-chip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>Non-Custodial View Keys</span>
+      </div>
+      <div class="feature-chip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10v10H7z"/></svg>
+        <span>0% Protocol Fees</span>
+      </div>
+      <div class="feature-chip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>E2E Tor Encrypted Chat</span>
+      </div>
+    </div>
+
+    <!-- QUICK START TERMINAL PILL -->
+    <div class="quickstart-box">
+      <div class="quickstart-code">
+        <span class="quickstart-prompt">$</span>
+        <span class="quickstart-text" id="quickStartCmd">git clone https://github.com/b4n6-b4n6/openshop.git</span>
+      </div>
+      <button class="quickstart-copy" id="btnCopyQuickStart" title="Copy command to clipboard">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span id="quickStartCopyText">Copy</span>
+      </button>
+    </div>
+
+    <!-- ENHANCED FOOTER -->
+    <footer class="landing-footer">
+      <div class="footer-links">
+        <a href="https://github.com/b4n6-b4n6/openshop" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span>·</span>
+        <a href="https://github.com/b4n6-b4n6/openshop/tree/main/docs" target="_blank" rel="noopener noreferrer">Docs</a>
+        <span>·</span>
+        <a href="https://t.me/OpenShop_P2P" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <span>·</span>
+        <a href="https://github.com/b4n6-b4n6/openshop/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>
+      </div>
+      <div>
+        OpenShop · Tor-Hosted P2P Marketplace · Non-Custodial Monero Settlement
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/demo.js" defer></script>
+  </body>
+</html>
