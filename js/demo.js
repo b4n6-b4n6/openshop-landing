@@ -98,22 +98,30 @@
     let currentActiveTicker = 1;
     function setTicker(stepNum) {
       if (currentActiveTicker === stepNum) return;
-      const currentItem = document.getElementById(`tickerStep${currentActiveTicker}`);
-      const nextItem = document.getElementById(`tickerStep${stepNum}`);
+      const currentItems = [
+        document.getElementById(`tickerStep${currentActiveTicker}`),
+        document.getElementById(`buyerTickerStep${currentActiveTicker}`)
+      ];
+      const nextItems = [
+        document.getElementById(`tickerStep${stepNum}`),
+        document.getElementById(`buyerTickerStep${stepNum}`)
+      ];
 
-      if (currentItem) {
+      currentItems.forEach(currentItem => {
+        if (!currentItem) return;
         currentItem.classList.remove('active');
         currentItem.classList.add('exiting');
         setTimeout(() => {
           currentItem.classList.remove('exiting');
         }, 350);
-      }
+      });
 
-      if (nextItem) {
+      nextItems.forEach(nextItem => {
+        if (!nextItem) return;
         setTimeout(() => {
           nextItem.classList.add('active');
         }, 50);
-      }
+      });
       currentActiveTicker = stepNum;
     }
 
@@ -174,14 +182,23 @@
       while (true) {
         // --- STAGE 0: RESET ALL STATES ---
         for (let i = 1; i <= 7; i++) {
-          const item = document.getElementById(`tickerStep${i}`);
-          if (item) {
+          const items = [
+            document.getElementById(`tickerStep${i}`),
+            document.getElementById(`buyerTickerStep${i}`)
+          ];
+          items.forEach(item => {
+            if (!item) return;
             item.classList.remove('active');
             item.classList.remove('exiting');
-          }
+          });
         }
-        const item1 = document.getElementById('tickerStep1');
-        if (item1) item1.classList.add('active');
+        const initialItems = [
+          document.getElementById('tickerStep1'),
+          document.getElementById('buyerTickerStep1')
+        ];
+        initialItems.forEach(item => {
+          if (item) item.classList.add('active');
+        });
         currentActiveTicker = 1;
 
         hideCursor(ownerCursor);
@@ -295,7 +312,7 @@
           if (onionProgressPercent) onionProgressPercent.textContent = `${p}%`;
           await delay(300);
         }
-        await delay(350);
+        await delay(2150);
 
         // --- STEP 4: LAND ON STORE PAGE FIRST ---
         setTicker(4);
