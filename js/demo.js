@@ -169,7 +169,9 @@
       });
     }
 
-    const delay = (ms) => new Promise(res => setTimeout(res, ms));
+    // Run each scripted step on a seven-second cadence instead of eight.
+    const STEP_TIME_SCALE = 7 / 8;
+    const delay = (ms) => new Promise(res => setTimeout(res, ms * STEP_TIME_SCALE));
 
     let simulationStarted = false;
     function startScenarioOnce() {
