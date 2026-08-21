@@ -95,34 +95,38 @@
       if (viewEl) viewEl.classList.add('active');
     }
 
-    let currentActiveTicker = 1;
-    function setTicker(stepNum) {
-      if (currentActiveTicker === stepNum) return;
-      const currentItems = [
-        document.getElementById(`tickerStep${currentActiveTicker}`),
-        document.getElementById(`buyerTickerStep${currentActiveTicker}`)
-      ];
-      const nextItems = [
-        document.getElementById(`tickerStep${stepNum}`),
-        document.getElementById(`buyerTickerStep${stepNum}`)
-      ];
+    const activeTicker = { owner: null, buyer: null };
+    function setTicker(phone, stepNum) {
+      const prefix = phone === 'owner' ? 'tickerStep' : 'buyerTickerStep';
+      const currentStep = activeTicker[phone];
+      if (currentStep === stepNum) return;
 
-      currentItems.forEach(currentItem => {
-        if (!currentItem) return;
+      const currentItem = currentStep
+        ? document.getElementById(`${prefix}${currentStep}`)
+        : null;
+      const nextItem = document.getElementById(`${prefix}${stepNum}`);
+
+      if (currentItem) {
         currentItem.classList.remove('active');
         currentItem.classList.add('exiting');
-        setTimeout(() => {
-          currentItem.classList.remove('exiting');
-        }, 350);
-      });
+        setTimeout(() => currentItem.classList.remove('exiting'), 350);
+      }
+      if (nextItem) nextItem.classList.add('active');
+      activeTicker[phone] = stepNum;
+    }
 
-      nextItems.forEach(nextItem => {
-        if (!nextItem) return;
-        setTimeout(() => {
-          nextItem.classList.add('active');
-        }, 50);
-      });
-      currentActiveTicker = stepNum;
+    function clearTicker(phone) {
+      const prefix = phone === 'owner' ? 'tickerStep' : 'buyerTickerStep';
+      const currentStep = activeTicker[phone];
+      const currentItem = currentStep
+        ? document.getElementById(`${prefix}${currentStep}`)
+        : null;
+      if (currentItem) {
+        currentItem.classList.remove('active');
+        currentItem.classList.add('exiting');
+        setTimeout(() => currentItem.classList.remove('exiting'), 350);
+      }
+      activeTicker[phone] = null;
     }
 
     // Typing animation simulation
@@ -169,9 +173,16 @@
       });
     }
 
-    // Run each scripted step on a seven-second cadence instead of eight.
-    const STEP_TIME_SCALE = 7 / 8;
-    const delay = (ms) => new Promise(res => setTimeout(res, ms * STEP_TIME_SCALE));
+    const CAPTION_DURATION = 7000;
+    const delay = (ms) => new Promise(res => setTimeout(res, ms));
+    const startCaption = (phone, stepNum) => {
+      setTicker(phone, stepNum);
+      return performance.now();
+    };
+    const finishCaption = async (startedAt) => {
+      const remaining = CAPTION_DURATION - (performance.now() - startedAt);
+      if (remaining > 0) await delay(remaining);
+    };
 
     let simulationStarted = false;
     function startScenarioOnce() {
@@ -194,14 +205,9 @@
             item.classList.remove('exiting');
           });
         }
-        const initialItems = [
-          document.getElementById('tickerStep1'),
-          document.getElementById('buyerTickerStep1')
-        ];
-        initialItems.forEach(item => {
-          if (item) item.classList.add('active');
-        });
-        currentActiveTicker = 1;
+        activeTicker.owner = null;
+        activeTicker.buyer = null;
+        let ownerCaptionStarted = startCaption('owner', 1);
 
         hideCursor(ownerCursor);
         hideCursor(buyerCursor);
@@ -277,8 +283,7 @@
         await delay(200);
         hideCursor(ownerCursor);
 
-        // --- STEP 2: WALLET SETUP INPUTS ---
-        setTicker(2);
+        // Continue the same phase through wallet configuration.
         switchOwnerView(ownerV2);
         await delay(500);
 
@@ -305,9 +310,10 @@
         await tapCursor(ownerCursor);
         await delay(200);
         hideCursor(ownerCursor);
+        await finishCaption(ownerCaptionStarted);
 
-        // --- STEP 3: SPINNING UP ONION (Tor daemon boots) ---
-        setTicker(3);
+        // --- PHASE 2: START TOR AND ARRIVE AT THE STOREFRONT ---
+        ownerCaptionStarted = startCaption('owner', 3);
         switchOwnerView(ownerV3);
 
         for (let p = 35; p <= 100; p += 20) {
@@ -315,20 +321,16 @@
           await delay(300);
         }
         await delay(2150);
-
-        // --- STEP 4: LAND ON STORE PAGE FIRST ---
-        setTicker(4);
         switchOwnerView(ownerV4);
         await delay(900);
+        await finishCaption(ownerCaptionStarted);
 
-        // Owner taps "Add product" button on store page
+        // --- PHASE 3: OPEN AND COMPLETE THE PRODUCT FORM ---
+        ownerCaptionStarted = startCaption('owner', 5);
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnStoreAddProduct', 550);
         await tapCursor(ownerCursor);
         await delay(250);
         hideCursor(ownerCursor);
-
-        // --- STEP 5: ADD PRODUCT FORM ---
-        setTicker(5);
         switchOwnerView(ownerV5);
         await delay(400);
 
@@ -371,9 +373,11 @@
         await tapCursor(ownerCursor);
         await delay(300);
         hideCursor(ownerCursor);
+        await finishCaption(ownerCaptionStarted);
 
-        // --- STEP 6: STORE WITH PRODUCT READY & SHARE QR OVER TOR ---
-        setTicker(6);
+        // --- PHASE 4: SHARE THE READY STORE AND OPEN ITS PRODUCTS ---
+        ownerCaptionStarted = startCaption('owner', 6);
+        let buyerCaptionStarted = startCaption('buyer', 1);
         switchOwnerView(ownerV6);
         await delay(600);
 
@@ -395,18 +399,22 @@
         hideCursor(buyerCursor);
         await delay(250);
 
-        // Buyer lands on Shop Page
+        // Buyer lands on the shop and opens its products in the same phase.
         switchBuyerView(buyerV2);
         await delay(700);
-
-        // Buyer taps "Products" button
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerShopProducts', 500);
         await tapCursor(buyerCursor);
         hideCursor(buyerCursor);
         await delay(300);
-
-        // Buyer sees Products list
         switchBuyerView(buyerV3);
+        await Promise.all([
+          finishCaption(ownerCaptionStarted),
+          finishCaption(buyerCaptionStarted)
+        ]);
+        clearTicker('owner');
+
+        // --- BUYER PHASE 2: REVIEW THE LISTING AND PRODUCT DETAILS ---
+        buyerCaptionStarted = startCaption('buyer', 5);
         await delay(600);
 
         // Buyer taps on "Purchase" button on product listing
@@ -414,12 +422,12 @@
         await tapCursor(buyerCursor);
         hideCursor(buyerCursor);
         await delay(300);
-
-        // Buyer sees product details & selects purchase
         switchBuyerView(buyerV4);
         await delay(600);
+        await finishCaption(buyerCaptionStarted);
 
-        // Buyer clicks "Purchase · 0.85 XMR"
+        // --- BUYER PHASE 3: PLACE THE ORDER AND CONFIRM PAYMENT ---
+        buyerCaptionStarted = startCaption('buyer', 6);
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnSubmitPurchaseOrder', 500);
         await tapCursor(buyerCursor);
         hideCursor(buyerCursor);
@@ -429,8 +437,8 @@
         switchBuyerView(buyerV5);
         await delay(800);
 
-        // Simulate Transaction Detection (Delay 1.6s)
-        await delay(1600);
+        // Simulate Transaction Detection
+        await delay(1200);
         if (buyerTxStatusNotice) {
           buyerTxStatusNotice.style.borderColor = 'rgba(246, 178, 60, 0.4)';
           buyerTxStatusNotice.style.background = 'var(--warning-soft)';
@@ -439,7 +447,7 @@
         if (buyerTxStatusText) buyerTxStatusText.textContent = 'Incoming transaction detected (0/10)';
         if (orderStatusBadge) orderStatusBadge.className = 'indicator-pill syncing';
         if (orderStatusBadgeText) orderStatusBadgeText.textContent = 'Detected';
-        await delay(1800);
+        await delay(1200);
 
         // Simulate Transaction Confirmation (10/10)
         if (buyerTxStatusNotice) {
@@ -451,7 +459,7 @@
         if (orderStatusBadge) orderStatusBadge.className = 'indicator-pill';
         if (orderStatusBadgeText) orderStatusBadgeText.textContent = 'Paid';
         if (buyerTxidBox) buyerTxidBox.style.display = 'block';
-        await delay(1000);
+        await delay(600);
 
         // Close owner's QR modal to reveal dashboard
         if (ownerQrModal) ownerQrModal.classList.remove('open');
@@ -462,9 +470,11 @@
         await tapCursor(buyerCursor);
         hideCursor(buyerCursor);
         await delay(300);
+        await finishCaption(buyerCaptionStarted);
 
         // --- STEP 7: BOTH PHONES IN REAL-TIME E2E CHAT ---
-        setTicker(7);
+        ownerCaptionStarted = startCaption('owner', 7);
+        buyerCaptionStarted = startCaption('buyer', 7);
         switchOwnerView(ownerV7);
         switchBuyerView(buyerV6);
         await delay(600);
@@ -523,7 +533,10 @@
         if (buyerMsg2) buyerMsg2.classList.add('pop-in');
 
         // Pause at completed scenario state before loop restarts
-        await delay(4500);
+        await Promise.all([
+          finishCaption(ownerCaptionStarted),
+          finishCaption(buyerCaptionStarted)
+        ]);
       }
     }
 
