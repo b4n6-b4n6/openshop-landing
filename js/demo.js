@@ -173,7 +173,7 @@
       });
     }
 
-    const CAPTION_DURATION = 7000;
+    const CAPTION_DURATION = 3000;
     const delay = (ms) => new Promise(res => setTimeout(res, ms));
     const startCaption = (phone, stepNum) => {
       setTicker(phone, stepNum);
@@ -181,6 +181,7 @@
     };
     const finishCaption = async (startedAt) => {
       const remaining = CAPTION_DURATION - (performance.now() - startedAt);
+      console.log(remaining);
       if (remaining > 0) await delay(remaining);
     };
 
@@ -275,7 +276,7 @@
 
         switchOwnerView(ownerV1);
         switchBuyerView(buyerV1);
-        await delay(1200);
+        await delay(3900);
 
         // --- STEP 1: OWNER TAPS "OPEN NEW SHOP" ---
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnOpenNewShop', 550);
@@ -283,10 +284,14 @@
         await delay(200);
         hideCursor(ownerCursor);
 
+        await finishCaption(ownerCaptionStarted);
+        // --- STEP 1b
+        ownerCaptionStarted = startCaption('owner', 2);
+
         // Continue the same phase through wallet configuration.
         switchOwnerView(ownerV2);
-        await delay(500);
-
+        await delay(3300);
+        
         // Tap Primary Address Field
         await moveCursorToEl(ownerCursor, ownerViewport, 'inputAddress', 450);
         await tapCursor(ownerCursor);
@@ -316,23 +321,31 @@
         ownerCaptionStarted = startCaption('owner', 3);
         switchOwnerView(ownerV3);
 
-        for (let p = 35; p <= 100; p += 20) {
+        for (let p = 15; p <= 100; p += 13) {
           if (onionProgressPercent) onionProgressPercent.textContent = `${p}%`;
-          await delay(300);
+          await delay(1200);
         }
-        await delay(2150);
-        switchOwnerView(ownerV4);
-        await delay(900);
-        await finishCaption(ownerCaptionStarted);
 
-        // --- PHASE 3: OPEN AND COMPLETE THE PRODUCT FORM ---
-        ownerCaptionStarted = startCaption('owner', 5);
+        await finishCaption(ownerCaptionStarted);
+        // --- STEP 2b
+        ownerCaptionStarted = startCaption('owner', 4);
+
+        switchOwnerView(ownerV4);
+
+        await delay(6300);
+
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnStoreAddProduct', 550);
         await tapCursor(ownerCursor);
         await delay(250);
         hideCursor(ownerCursor);
+
+        await finishCaption(ownerCaptionStarted);
+
+        // --- PHASE 3: OPEN AND COMPLETE THE PRODUCT FORM ---
+        ownerCaptionStarted = startCaption('owner', 5);
+
         switchOwnerView(ownerV5);
-        await delay(400);
+        await delay(3700);
 
         // Tap Product Name
         await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdName', 450);
@@ -373,25 +386,26 @@
         await tapCursor(ownerCursor);
         await delay(300);
         hideCursor(ownerCursor);
-        await finishCaption(ownerCaptionStarted);
 
         // --- PHASE 4: SHARE THE READY STORE AND OPEN ITS PRODUCTS ---
-        ownerCaptionStarted = startCaption('owner', 6);
-        let buyerCaptionStarted = startCaption('buyer', 1);
         switchOwnerView(ownerV6);
         await delay(600);
 
         // Owner opens QR code modal
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnOwnerQrTrigger', 500);
         await tapCursor(ownerCursor);
+        ownerCaptionStarted = startCaption('owner', 6);
         if (ownerQrModal) ownerQrModal.classList.add('open');
         await delay(400);
         hideCursor(ownerCursor);
+        await delay(4200);
+
+        let buyerCaptionStarted = startCaption('buyer', 1);
 
         // --- BUYER DETECTS LIVE ONION ADDRESS ---
         if (buyerStandbyWaiting) buyerStandbyWaiting.style.display = 'none';
         if (buyerScanTriggerBox) buyerScanTriggerBox.style.display = 'flex';
-        await delay(600);
+        await delay(6200);
 
         // Buyer clicks "OPEN SHOP"
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerConnect', 500);
@@ -399,35 +413,36 @@
         hideCursor(buyerCursor);
         await delay(250);
 
+        await finishCaption(buyerCaptionStarted);
+        buyerCaptionStarted = startCaption('buyer', 2);
+
         // Buyer lands on the shop and opens its products in the same phase.
         switchBuyerView(buyerV2);
-        await delay(700);
+
+        await delay(4100);
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerShopProducts', 500);
         await tapCursor(buyerCursor);
         hideCursor(buyerCursor);
         await delay(300);
+        await finishCaption(buyerCaptionStarted);
+        buyerCaptionStarted = startCaption('buyer', 5);
         switchBuyerView(buyerV3);
-        await Promise.all([
-          finishCaption(ownerCaptionStarted),
-          finishCaption(buyerCaptionStarted)
-        ]);
-        clearTicker('owner');
 
         // --- BUYER PHASE 2: REVIEW THE LISTING AND PRODUCT DETAILS ---
-        buyerCaptionStarted = startCaption('buyer', 5);
-        await delay(600);
+        await delay(3700);
 
         // Buyer taps on "Purchase" button on product listing
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerListingPurchase', 450);
         await tapCursor(buyerCursor);
         hideCursor(buyerCursor);
         await delay(300);
-        switchBuyerView(buyerV4);
-        await delay(600);
         await finishCaption(buyerCaptionStarted);
-
+        
         // --- BUYER PHASE 3: PLACE THE ORDER AND CONFIRM PAYMENT ---
         buyerCaptionStarted = startCaption('buyer', 6);
+        switchBuyerView(buyerV4);
+        await delay(4100);
+
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnSubmitPurchaseOrder', 500);
         await tapCursor(buyerCursor);
         hideCursor(buyerCursor);
@@ -435,7 +450,7 @@
 
         // Lands on Monero Invoice (orderPage.js)
         switchBuyerView(buyerV5);
-        await delay(800);
+        await delay(2400);
 
         // Simulate Transaction Detection
         await delay(1200);
@@ -459,7 +474,7 @@
         if (orderStatusBadge) orderStatusBadge.className = 'indicator-pill';
         if (orderStatusBadgeText) orderStatusBadgeText.textContent = 'Paid';
         if (buyerTxidBox) buyerTxidBox.style.display = 'block';
-        await delay(600);
+        await delay(3900);
 
         // Close owner's QR modal to reveal dashboard
         if (ownerQrModal) ownerQrModal.classList.remove('open');
@@ -470,14 +485,17 @@
         await tapCursor(buyerCursor);
         hideCursor(buyerCursor);
         await delay(300);
-        await finishCaption(buyerCaptionStarted);
+        await Promise.all([
+          finishCaption(buyerCaptionStarted),
+          finishCaption(ownerCaptionStarted),
+        ])
 
         // --- STEP 7: BOTH PHONES IN REAL-TIME E2E CHAT ---
         ownerCaptionStarted = startCaption('owner', 7);
         buyerCaptionStarted = startCaption('buyer', 7);
         switchOwnerView(ownerV7);
         switchBuyerView(buyerV6);
-        await delay(600);
+        await delay(3100);
 
         // Buyer focuses input and types
         const buyerChatEl = document.getElementById('buyerChatInput');
@@ -531,6 +549,8 @@
         const buyerMsg2 = document.getElementById('buyerChatMsg2');
         if (ownerMsg2) ownerMsg2.classList.add('pop-in');
         if (buyerMsg2) buyerMsg2.classList.add('pop-in');
+
+        await delay(18000);
 
         // Pause at completed scenario state before loop restarts
         await Promise.all([

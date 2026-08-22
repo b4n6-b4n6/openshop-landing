@@ -77,10 +77,10 @@
       <div class="phone-column">
         <div class="phone-header-label">
           <div class="phone-role-text">
-            <span class="role-dot"></span>
+            <span class="role-dot buyer"></span>
             <span>Shop Owner</span>
           </div>
-          <div class="phone-sub-tag">P2P Client</div>
+          <div class="phone-sub-tag"></div>
         </div>
 
         <div class="phone-device" id="ownerDevice">
@@ -90,7 +90,7 @@
             <div class="phone-statusbar">
               <span>12:00</span>
               <div class="phone-notch"></div>
-              <span>5G</span>
+              <span>P2P Client</span>
             </div>
 
             <div class="phone-viewport" id="ownerViewport">
@@ -478,19 +478,25 @@
         <!-- CENTERED ANIMATED TEXT (Full White, Bold, No timer, no steps, no dashes) -->
         <div class="feature-ticker-container">
           <div class="ticker-item active" id="tickerStep1">
-            Launch without cloud dependencies—view keys track payments while spend keys stay safe.
+            Launch your store instantly with zero cloud dependencies
+          </div>
+          <div class="ticker-item" id="tickerStep2">
+            Non-custodial view keys track incoming payments while spend keys stay safe
           </div>
           <div class="ticker-item" id="tickerStep3">
-            Start Tor with no port forwarding, then manage inventory, orders, and buyer messages.
+            Tor hidden service starts automatically with zero port forwarding required
+          </div>
+          <div class="ticker-item" id="tickerStep4">
+            Manage your storefront inventory, orders and direct buyer communications
           </div>
           <div class="ticker-item" id="tickerStep5">
-            Add products with photos, detailed descriptions, pricing, and inventory in one quick flow.
+            List products in seconds with photos, details, descriptions and pricing
           </div>
           <div class="ticker-item" id="tickerStep6">
-            Share your store privately over Tor—buyers connect directly with no middleman.
+            Share your store privately over Tor — buyers connect directly with no middleman
           </div>
           <div class="ticker-item" id="tickerStep7">
-            Direct end-to-end encrypted messaging over the Tor network.
+            Direct end-to-end encrypted messaging over Tor
           </div>
         </div>
       </div>
@@ -503,9 +509,9 @@
         <div class="phone-header-label">
           <div class="phone-role-text">
             <span class="role-dot buyer"></span>
-            <span>Buyer</span>
+            <span>Shop Customer</span>
           </div>
-          <div class="phone-sub-tag">P2P Client / Tor Browser</div>
+          <div class="phone-sub-tag"></div>
         </div>
 
         <div class="phone-device" id="buyerDevice">
@@ -514,7 +520,7 @@
             <div class="phone-statusbar">
               <span>12:00</span>
               <div class="phone-notch"></div>
-              <span>P2P Client</span>
+              <span>P2P Client / Tor Browser</span>
             </div>
 
             <div class="phone-viewport" id="buyerViewport">
@@ -526,7 +532,7 @@
               <div class="view-panel active" id="buyerV1">
                 <div class="app-header">
                   <div class="app-header-left"></div>
-                  <div class="app-header-title">Tor Onion Browser</div>
+                  <div class="app-header-title">OpenShop</div>
                   <div class="indicators-group">
                     <div class="indicator-pill" title="Tor circuit ready">
                       <span class="indicator-dot"></span><span>Ready</span>
@@ -540,15 +546,14 @@
                       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
                     </div>
                     <div>
-                      <h3 style="font-size: 14px; font-weight: 700; color: var(--text);">Tor Onion Browser</h3>
-                      <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px; max-width: 200px;">Waiting for shop broadcast…</p>
+                      <h3 style="font-size: 14px; font-weight: 700; color: var(--text);">Browser</h3>
                     </div>
                   </div>
 
                   <div id="buyerScanTriggerBox" style="display: none; width: 100%; flex-direction: column; gap: 10px; margin-top: 18px;">
                     <div class="app-input mono" style="font-size: 11px; color: var(--accent);">http://2p2…xmr.onion</div>
                     <button class="app-btn app-btn-primary" id="btnBuyerConnect">
-                      <span>OPEN SHOP</span>
+                      <span>BROWSE SHOP</span>
                     </button>
                   </div>
                 </div>
@@ -828,16 +833,19 @@
 
         <div class="feature-ticker-container">
           <div class="ticker-item" id="buyerTickerStep1">
-            Open a private Tor storefront with no account or exposed server, then browse and contact the seller directly.
+            Connect privately from the P2P client or Tor Browser — no account required
+          </div>
+          <div class="ticker-item" id="buyerTickerStep2">
+            Explore the live storefront and contact the seller directly
           </div>
           <div class="ticker-item" id="buyerTickerStep5">
-            Review product photos, detailed descriptions, and transparent pricing.
+            Review product photos, detailed descriptions, and transparent pricing
           </div>
           <div class="ticker-item" id="buyerTickerStep6">
-            Place an order and receive a private invoice with live payment status.
+            Place an order and receive an invoice with live payment status
           </div>
           <div class="ticker-item" id="buyerTickerStep7">
-            Chat end-to-end over Tor without platforms, trackers, or intermediaries.
+            Chat without platforms, trackers, or intermediaries
           </div>
         </div>
       </div>
