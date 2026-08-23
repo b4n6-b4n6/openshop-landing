@@ -587,7 +587,6 @@
         if (buyerMsg2) buyerMsg2.classList.add('pop-in');
 
         await delay(18000);
-        await delay(999999999);
 
         // Pause at completed scenario state before loop restarts
         await Promise.all([
