@@ -6,6 +6,9 @@
 (function () {
   'use strict';
 
+  const HIDE_CURSOR_DELAY = 300;
+  const TYPING_DELAY = 300;
+
   // Wait for DOM to be ready
   function initDemo() {
     // Containers & Viewports
@@ -274,13 +277,13 @@
 
         switchOwnerView(ownerV1);
         switchBuyerView(buyerV1);
-        await delay(3900);
+        await delay(3800);
 
         // --- STEP 1: OWNER TAPS "OPEN NEW SHOP" ---
-        await moveCursorToEl(ownerCursor, ownerViewport, 'btnOpenNewShop', 550);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'btnOpenNewShop', 500);
         await tapCursor(ownerCursor);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(ownerCursor);
 
         // --- STEP 1b
@@ -292,23 +295,23 @@
         await delay(1400);
         
         // Tap Primary Address Field
-        await moveCursorToEl(ownerCursor, ownerViewport, 'inputAddress', 450);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'inputAddress', 500);
         await tapCursor(ownerCursor);
         if (elInputAddress) await typeText(elInputAddress, '888tX2mN17YKpnC9qZ5v10…', 16);
-        await delay(200);
+        await delay(TYPING_DELAY);
 
         // Tap Private View Key Field
-        await moveCursorToEl(ownerCursor, ownerViewport, 'inputViewKey', 450);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'inputViewKey', 500);
         await tapCursor(ownerCursor);
         if (elInputViewKey) await typeText(elInputViewKey, 'a4b870c2f819e91ff0287…', 16);
-        await delay(200);
+        await delay(TYPING_DELAY);
 
         // Tap Restore Height Field
-        await moveCursorToEl(ownerCursor, ownerViewport, 'inputHeight', 450);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'inputHeight', 500);
         await tapCursor(ownerCursor);
         if (elInputHeight) await typeText(elInputHeight, '3200000', 30);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(ownerCursor);
 
         await delay(3900);
@@ -317,7 +320,7 @@
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnCreateShop', 500);
         await tapCursor(ownerCursor);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(ownerCursor);
         
         // --- PHASE 2: START TOR AND ARRIVE AT THE STOREFRONT ---
@@ -337,10 +340,10 @@
 
         await delay(6300);
 
-        await moveCursorToEl(ownerCursor, ownerViewport, 'btnStoreAddProduct', 550);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'btnStoreAddProduct', 500);
         await tapCursor(ownerCursor);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(ownerCursor);
         
         // --- PHASE 3: OPEN AND COMPLETE THE PRODUCT FORM ---
@@ -350,19 +353,19 @@
         await delay(2100);
 
         // Tap Product Name
-        await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdName', 450);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdName', 500);
         await tapCursor(ownerCursor);
         if (elInputProdName) await typeText(elInputProdName, 'Coldcard Mk4', 20);
-        await delay(200);
+        await delay(TYPING_DELAY);
 
         // Tap Description
-        await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdDesc', 450);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdDesc', 500);
         await tapCursor(ownerCursor);
         if (elInputProdDesc) await typeText(elInputProdDesc, 'Air-gapped signing device with dual secure elements.', 14);
-        await delay(200);
+        await delay(TYPING_DELAY);
 
         // Upload photo simulation
-        await moveCursorToEl(ownerCursor, ownerViewport, 'photoPickerBox', 450);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'photoPickerBox', 500);
         await tapCursor(ownerCursor);
         if (elPhotoPickerLabel) elPhotoPickerLabel.textContent = '✓ coldcard_mk4.png (11 KB)';
         if (elPhotoPickerThumb) elPhotoPickerThumb.style.display = 'block';
@@ -374,15 +377,16 @@
         await delay(300);
 
         // Price & Qty
-        await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdPrice', 400);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdPrice', 500);
         await tapCursor(ownerCursor);
         if (elInputProdPrice) await typeText(elInputProdPrice, '0.85', 25);
+        await delay(TYPING_DELAY);
 
-        await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdQty', 400);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdQty', 500);
         await tapCursor(ownerCursor);
         if (elInputProdQty) await typeText(elInputProdQty, '5', 25);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(ownerCursor);
 
         await delay(3900);
@@ -391,7 +395,7 @@
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnAddProductSubmit', 500);
         await tapCursor(ownerCursor);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(ownerCursor);
 
         // --- PHASE 4: SHARE THE READY STORE AND OPEN ITS PRODUCTS ---
@@ -405,7 +409,7 @@
         ownerCaptionStarted = startCaption('owner', 6);
         if (ownerQrModal) ownerQrModal.classList.add('open');
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(ownerCursor);
 
         await delay(4200);
@@ -415,17 +419,17 @@
         await tapCursor(buyerCursor);
         if (elInputAddress) await typeText(elInputShopOnion, 'http://2p2…xmr.onion', 16);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(buyerCursor);
         
         // --- BUYER DETECTS LIVE ONION ADDRESS ---
-        await delay(4100);
+        await delay(3800);
 
         // Buyer clicks "OPEN SHOP"
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerConnect', 500);
         await tapCursor(buyerCursor);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(buyerCursor);
 
         // Buyer lands on the shop and opens its products in the same phase.
@@ -437,7 +441,7 @@
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerShopProducts', 500);
         await tapCursor(buyerCursor);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(buyerCursor);
 
         await finishCaption(buyerCaptionStarted);
@@ -448,10 +452,10 @@
         await delay(3700);
 
         // Buyer taps on "Purchase" button on product listing
-        await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerListingPurchase', 450);
+        await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerListingPurchase', 500);
         await tapCursor(buyerCursor);
         
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(buyerCursor);
         
         // --- BUYER PHASE 3: PLACE THE ORDER AND CONFIRM PAYMENT ---
@@ -463,15 +467,14 @@
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnSubmitPurchaseOrder', 500);
         await tapCursor(buyerCursor);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(buyerCursor);
 
         // Lands on Monero Invoice (orderPage.js)
         switchBuyerView(buyerV5);
-        await delay(2400);
+        await delay(4400);
 
         // Simulate Transaction Detection
-        await delay(1200);
         if (buyerTxStatusNotice) {
           buyerTxStatusNotice.style.borderColor = 'rgba(246, 178, 60, 0.4)';
           buyerTxStatusNotice.style.background = 'var(--warning-soft)';
@@ -480,7 +483,7 @@
         if (buyerTxStatusText) buyerTxStatusText.textContent = 'Incoming transaction detected (0/10)';
         if (orderStatusBadge) orderStatusBadge.className = 'indicator-pill syncing';
         if (orderStatusBadgeText) orderStatusBadgeText.textContent = 'Detected';
-        await delay(1200);
+        await delay(2700);
 
         // Simulate Transaction Confirmation (10/10)
         if (buyerTxStatusNotice) {
@@ -496,21 +499,30 @@
 
         // Close owner's QR modal to reveal dashboard
         if (ownerQrModal) ownerQrModal.classList.remove('open');
-        await delay(300);
+        await delay(1100);
 
         // Buyer taps "Chat with seller"
-        await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerOpenChat', 500);
-        await tapCursor(buyerCursor);
+        await Promise.all([
+          moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerOpenChat', 500),
+          moveCursorToEl(ownerCursor, ownerViewport, 'btnSellerOpenChat', 500),
+        ]);
+        await Promise.all([
+          tapCursor(buyerCursor),
+          tapCursor(ownerCursor),
+        ]);
 
-        await delay(300);
-        hideCursor(buyerCursor);
+        await delay(HIDE_CURSOR_DELAY);
+        await Promise.all([
+          hideCursor(buyerCursor),
+          hideCursor(ownerCursor),
+        ]);
 
+        // --- STEP 7: BOTH PHONES IN REAL-TIME E2E CHAT ---
         await Promise.all([
           finishCaption(buyerCaptionStarted),
           finishCaption(ownerCaptionStarted),
         ])
 
-        // --- STEP 7: BOTH PHONES IN REAL-TIME E2E CHAT ---
         ownerCaptionStarted = startCaption('owner', 7);
         buyerCaptionStarted = startCaption('buyer', 7);
         switchOwnerView(ownerV7);
@@ -519,19 +531,19 @@
 
         // Buyer focuses input and types
         const buyerChatEl = document.getElementById('buyerChatInput');
-        await moveCursorToEl(buyerCursor, buyerViewport, 'buyerChatInput', 450, 0.25, 0.5);
+        await moveCursorToEl(buyerCursor, buyerViewport, 'buyerChatInput', 500, 0.25, 0.5);
         await tapCursor(buyerCursor);
         if (buyerChatEl) {
           buyerChatEl.classList.remove('placeholder');
           await typeText(buyerChatEl, 'Can you ship with stealth packaging?', 22);
-          await delay(200);
+          await delay(HIDE_CURSOR_DELAY);
         }
 
         // Buyer taps Send button
-        await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerSendMsg', 350);
+        await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerSendMsg', 500);
         await tapCursor(buyerCursor);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(buyerCursor);
 
         // Clear buyer input and pop message 1 from the bottom on both phones!
@@ -548,19 +560,19 @@
 
         // Owner focuses input and replies
         const ownerChatEl = document.getElementById('ownerChatInput');
-        await moveCursorToEl(ownerCursor, ownerViewport, 'ownerChatInput', 450, 0.25, 0.5);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'ownerChatInput', 500, 0.25, 0.5);
         await tapCursor(ownerCursor);
         if (ownerChatEl) {
           ownerChatEl.classList.remove('placeholder');
           await typeText(ownerChatEl, 'Packed & vacuum-sealed. Dispatched today! 📦', 18);
-          await delay(200);
+          await delay(HIDE_CURSOR_DELAY);
         }
 
         // Owner taps Send button
-        await moveCursorToEl(ownerCursor, ownerViewport, 'btnOwnerSendMsg', 350);
+        await moveCursorToEl(ownerCursor, ownerViewport, 'btnOwnerSendMsg', 500);
         await tapCursor(ownerCursor);
 
-        await delay(300);
+        await delay(HIDE_CURSOR_DELAY);
         hideCursor(ownerCursor);
 
         // Clear owner input and pop message 2 from the bottom on both phones!
@@ -575,6 +587,7 @@
         if (buyerMsg2) buyerMsg2.classList.add('pop-in');
 
         await delay(18000);
+        await delay(999999999);
 
         // Pause at completed scenario state before loop restarts
         await Promise.all([
