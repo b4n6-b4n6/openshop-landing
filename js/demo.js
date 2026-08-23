@@ -279,14 +279,15 @@
         // --- STEP 1: OWNER TAPS "OPEN NEW SHOP" ---
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnOpenNewShop', 550);
         await tapCursor(ownerCursor);
-        await delay(200);
+
+        await delay(300);
         hideCursor(ownerCursor);
 
-        await finishCaption(ownerCaptionStarted);
         // --- STEP 1b
-        ownerCaptionStarted = startCaption('owner', 2);
-
         // Continue the same phase through wallet configuration.
+
+        await finishCaption(ownerCaptionStarted);
+        ownerCaptionStarted = startCaption('owner', 2);
         switchOwnerView(ownerV2);
         await delay(1400);
         
@@ -306,16 +307,21 @@
         await moveCursorToEl(ownerCursor, ownerViewport, 'inputHeight', 450);
         await tapCursor(ownerCursor);
         if (elInputHeight) await typeText(elInputHeight, '3200000', 30);
+
+        await delay(300);
+        hideCursor(ownerCursor);
+
         await delay(3900);
 
         // Tap Create Shop Button
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnCreateShop', 500);
         await tapCursor(ownerCursor);
-        await delay(200);
-        hideCursor(ownerCursor);
-        await finishCaption(ownerCaptionStarted);
 
+        await delay(300);
+        hideCursor(ownerCursor);
+        
         // --- PHASE 2: START TOR AND ARRIVE AT THE STOREFRONT ---
+        await finishCaption(ownerCaptionStarted);
         ownerCaptionStarted = startCaption('owner', 3);
         switchOwnerView(ownerV3);
 
@@ -324,24 +330,22 @@
           await delay(1200);
         }
 
-        await finishCaption(ownerCaptionStarted);
         // --- STEP 2b
+        await finishCaption(ownerCaptionStarted);
         ownerCaptionStarted = startCaption('owner', 4);
-
         switchOwnerView(ownerV4);
 
         await delay(6300);
 
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnStoreAddProduct', 550);
         await tapCursor(ownerCursor);
-        await delay(250);
+
+        await delay(300);
         hideCursor(ownerCursor);
-
-        await finishCaption(ownerCaptionStarted);
-
+        
         // --- PHASE 3: OPEN AND COMPLETE THE PRODUCT FORM ---
+        await finishCaption(ownerCaptionStarted);
         ownerCaptionStarted = startCaption('owner', 5);
-
         switchOwnerView(ownerV5);
         await delay(2100);
 
@@ -377,32 +381,41 @@
         await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdQty', 400);
         await tapCursor(ownerCursor);
         if (elInputProdQty) await typeText(elInputProdQty, '5', 25);
+
+        await delay(300);
+        hideCursor(ownerCursor);
+
         await delay(3900);
 
         // Tap "Add product" button
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnAddProductSubmit', 500);
         await tapCursor(ownerCursor);
+
         await delay(300);
         hideCursor(ownerCursor);
 
         // --- PHASE 4: SHARE THE READY STORE AND OPEN ITS PRODUCTS ---
         switchOwnerView(ownerV6);
-        await delay(600);
+        await delay(1600);
 
         // Owner opens QR code modal
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnOwnerQrTrigger', 500);
         await tapCursor(ownerCursor);
+
         ownerCaptionStarted = startCaption('owner', 6);
         if (ownerQrModal) ownerQrModal.classList.add('open');
-        await delay(400);
+
+        await delay(300);
         hideCursor(ownerCursor);
+
         await delay(4200);
 
         let buyerCaptionStarted = startCaption('buyer', 1);
         await moveCursorToEl(buyerCursor, buyerViewport, 'inputShopOnion', 500);
         await tapCursor(buyerCursor);
         if (elInputAddress) await typeText(elInputShopOnion, 'http://2p2…xmr.onion', 16);
-        await delay(200);
+
+        await delay(300);
         hideCursor(buyerCursor);
         
         // --- BUYER DETECTS LIVE ONION ADDRESS ---
@@ -411,20 +424,22 @@
         // Buyer clicks "OPEN SHOP"
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerConnect', 500);
         await tapCursor(buyerCursor);
-        hideCursor(buyerCursor);
-        await delay(250);
 
-        await finishCaption(buyerCaptionStarted);
-        buyerCaptionStarted = startCaption('buyer', 2);
+        await delay(300);
+        hideCursor(buyerCursor);
 
         // Buyer lands on the shop and opens its products in the same phase.
+        await finishCaption(buyerCaptionStarted);
+        buyerCaptionStarted = startCaption('buyer', 2);
         switchBuyerView(buyerV2);
-
         await delay(4100);
+
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerShopProducts', 500);
         await tapCursor(buyerCursor);
-        hideCursor(buyerCursor);
+
         await delay(300);
+        hideCursor(buyerCursor);
+
         await finishCaption(buyerCaptionStarted);
         buyerCaptionStarted = startCaption('buyer', 5);
         switchBuyerView(buyerV3);
@@ -435,19 +450,21 @@
         // Buyer taps on "Purchase" button on product listing
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerListingPurchase', 450);
         await tapCursor(buyerCursor);
-        /////
+        
         await delay(300);
-        await finishCaption(buyerCaptionStarted);
+        hideCursor(buyerCursor);
         
         // --- BUYER PHASE 3: PLACE THE ORDER AND CONFIRM PAYMENT ---
+        await finishCaption(buyerCaptionStarted);
         buyerCaptionStarted = startCaption('buyer', 6);
         switchBuyerView(buyerV4);
         await delay(4100);
 
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnSubmitPurchaseOrder', 500);
         await tapCursor(buyerCursor);
-        hideCursor(buyerCursor);
+
         await delay(300);
+        hideCursor(buyerCursor);
 
         // Lands on Monero Invoice (orderPage.js)
         switchBuyerView(buyerV5);
@@ -484,8 +501,10 @@
         // Buyer taps "Chat with seller"
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerOpenChat', 500);
         await tapCursor(buyerCursor);
-        hideCursor(buyerCursor);
+
         await delay(300);
+        hideCursor(buyerCursor);
+
         await Promise.all([
           finishCaption(buyerCaptionStarted),
           finishCaption(ownerCaptionStarted),
@@ -505,12 +524,14 @@
         if (buyerChatEl) {
           buyerChatEl.classList.remove('placeholder');
           await typeText(buyerChatEl, 'Can you ship with stealth packaging?', 22);
+          await delay(200);
         }
-        await delay(200);
 
         // Buyer taps Send button
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerSendMsg', 350);
         await tapCursor(buyerCursor);
+
+        await delay(300);
         hideCursor(buyerCursor);
 
         // Clear buyer input and pop message 1 from the bottom on both phones!
@@ -532,12 +553,14 @@
         if (ownerChatEl) {
           ownerChatEl.classList.remove('placeholder');
           await typeText(ownerChatEl, 'Packed & vacuum-sealed. Dispatched today! 📦', 18);
+          await delay(200);
         }
-        await delay(200);
 
         // Owner taps Send button
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnOwnerSendMsg', 350);
         await tapCursor(ownerCursor);
+
+        await delay(300);
         hideCursor(ownerCursor);
 
         // Clear owner input and pop message 2 from the bottom on both phones!
