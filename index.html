@@ -541,17 +541,8 @@
                 </div>
 
                 <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px; text-align: center;">
-                  <div id="buyerStandbyWaiting" style="display: flex; flex-direction: column; align-items: center; gap: 14px;">
-                    <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--bg-surface-2); display: flex; align-items: center; justify-content: center; color: var(--text-faint);">
-                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                    </div>
-                    <div>
-                      <h3 style="font-size: 14px; font-weight: 700; color: var(--text);">Browser</h3>
-                    </div>
-                  </div>
-
-                  <div id="buyerScanTriggerBox" style="display: none; width: 100%; flex-direction: column; gap: 10px; margin-top: 18px;">
-                    <div class="app-input mono" style="font-size: 11px; color: var(--accent);">http://2p2…xmr.onion</div>
+                  <div id="buyerScanTriggerBox" style="display: flex; width: 100%; flex-direction: column; gap: 10px; margin-top: 18px;">
+                    <div class="app-input mono" style="font-size: 11px; color: var(--accent);" id="inputShopOnion"></div>
                     <button class="app-btn app-btn-primary" id="btnBuyerConnect">
                       <span>BROWSE SHOP</span>
                     </button>

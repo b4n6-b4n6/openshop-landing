@@ -30,8 +30,6 @@
     const buyerV4 = document.getElementById('buyerV4');
     const buyerV5 = document.getElementById('buyerV5');
     const buyerV6 = document.getElementById('buyerV6');
-    const buyerStandbyWaiting = document.getElementById('buyerStandbyWaiting');
-    const buyerScanTriggerBox = document.getElementById('buyerScanTriggerBox');
 
     const orderStatusBadge = document.getElementById('orderStatusBadge');
     const orderStatusBadgeText = document.getElementById('orderStatusBadgeText');
@@ -213,8 +211,6 @@
         hideCursor(ownerCursor);
         hideCursor(buyerCursor);
         if (ownerQrModal) ownerQrModal.classList.remove('open');
-        if (buyerStandbyWaiting) buyerStandbyWaiting.style.display = 'flex';
-        if (buyerScanTriggerBox) buyerScanTriggerBox.style.display = 'none';
 
         const elInputAddress = document.getElementById('inputAddress');
         const elInputViewKey = document.getElementById('inputViewKey');
@@ -227,6 +223,7 @@
         const elPhotoPickerIcon = document.getElementById('photoPickerIcon');
         const elInputProdPrice = document.getElementById('inputProdPrice');
         const elInputProdQty = document.getElementById('inputProdQty');
+        const elInputShopOnion = document.getElementById('inputShopOnion');
 
         if (elInputAddress) elInputAddress.textContent = '4…';
         if (elInputViewKey) elInputViewKey.textContent = 'secret view key';
@@ -242,6 +239,7 @@
         }
         if (elInputProdPrice) elInputProdPrice.textContent = '0.00';
         if (elInputProdQty) elInputProdQty.textContent = '1';
+        if (elInputShopOnion) elInputShopOnion.textContent = '';
 
         // Reset Invoice state
         if (orderStatusBadge) orderStatusBadge.className = 'indicator-pill syncing';
@@ -290,7 +288,7 @@
 
         // Continue the same phase through wallet configuration.
         switchOwnerView(ownerV2);
-        await delay(3300);
+        await delay(1400);
         
         // Tap Primary Address Field
         await moveCursorToEl(ownerCursor, ownerViewport, 'inputAddress', 450);
@@ -308,7 +306,7 @@
         await moveCursorToEl(ownerCursor, ownerViewport, 'inputHeight', 450);
         await tapCursor(ownerCursor);
         if (elInputHeight) await typeText(elInputHeight, '3200000', 30);
-        await delay(250);
+        await delay(3900);
 
         // Tap Create Shop Button
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnCreateShop', 500);
@@ -345,7 +343,7 @@
         ownerCaptionStarted = startCaption('owner', 5);
 
         switchOwnerView(ownerV5);
-        await delay(3700);
+        await delay(2100);
 
         // Tap Product Name
         await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdName', 450);
@@ -379,7 +377,7 @@
         await moveCursorToEl(ownerCursor, ownerViewport, 'inputProdQty', 400);
         await tapCursor(ownerCursor);
         if (elInputProdQty) await typeText(elInputProdQty, '5', 25);
-        await delay(250);
+        await delay(3900);
 
         // Tap "Add product" button
         await moveCursorToEl(ownerCursor, ownerViewport, 'btnAddProductSubmit', 500);
@@ -401,11 +399,14 @@
         await delay(4200);
 
         let buyerCaptionStarted = startCaption('buyer', 1);
-
+        await moveCursorToEl(buyerCursor, buyerViewport, 'inputShopOnion', 500);
+        await tapCursor(buyerCursor);
+        if (elInputAddress) await typeText(elInputShopOnion, 'http://2p2…xmr.onion', 16);
+        await delay(200);
+        hideCursor(buyerCursor);
+        
         // --- BUYER DETECTS LIVE ONION ADDRESS ---
-        if (buyerStandbyWaiting) buyerStandbyWaiting.style.display = 'none';
-        if (buyerScanTriggerBox) buyerScanTriggerBox.style.display = 'flex';
-        await delay(6200);
+        await delay(4100);
 
         // Buyer clicks "OPEN SHOP"
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerConnect', 500);
@@ -434,7 +435,7 @@
         // Buyer taps on "Purchase" button on product listing
         await moveCursorToEl(buyerCursor, buyerViewport, 'btnBuyerListingPurchase', 450);
         await tapCursor(buyerCursor);
-        hideCursor(buyerCursor);
+        /////
         await delay(300);
         await finishCaption(buyerCaptionStarted);
         
